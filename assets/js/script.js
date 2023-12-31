@@ -58,7 +58,7 @@ const get_prayer_times = async (day, year, month, lat, lon, success) => {
             success(JSON.parse(xmlHttp.responseText), save_data)
         }
     }
-    await xmlHttp.open("GET", 'https://api.aladhan.com/v1/timings/' + day + '-' + month + '-' + year + '?latitude=' + lat + '&longitude=' + lon + '&tune=0,0,0,0,45,0,0,0,40', true)
+    await xmlHttp.open("GET", 'https://api.aladhan.com/v1/timings/' + day + '-' + month + '-' + year + '?latitude=' + lat + '&longitude=' + lon + '&tune=0,0,0,0,45,0,0,0,-40', true)
     xmlHttp.send()
 }
 const position_got = position => {
