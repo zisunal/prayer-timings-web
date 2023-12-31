@@ -131,7 +131,7 @@ const calculate_remining = () => {
     let asr_st_timestamp = add_h_to_date(local_date.getFullYear() + "-" + (local_date.getMonth() + 1) + "-" + local_date.getDate() + " " + prev_data.timings.Asr)
     let asr_end_timestamp = add_h_to_date(local_date.getFullYear() + "-" + (local_date.getMonth() + 1) + "-" + local_date.getDate() + " " + prev_data.timings.Sunset, 0, -10)
 
-    let magh_st_timestamp = add_h_to_date(local_date.getFullYear() + "-" + (local_date.getMonth() + 1) + "-" + local_date.getDate() + " " + prev_data.timings.Maghrib, 0, 30)
+    let magh_st_timestamp = add_h_to_date(local_date.getFullYear() + "-" + (local_date.getMonth() + 1) + "-" + local_date.getDate() + " " + prev_data.timings.Maghrib)
     let magh_end_timestamp = add_h_to_date(local_date.getFullYear() + "-" + (local_date.getMonth() + 1) + "-" + local_date.getDate() + " " + prev_data.timings.Maghrib, 0, 30)
     
     let ish_st_timestamp = add_h_to_date(local_date.getFullYear() + "-" + (local_date.getMonth() + 1) + "-" + local_date.getDate() + " " + prev_data.timings.Isha)
@@ -171,3 +171,29 @@ if (getCookie("tpt") === null) {
     data_btn.style.display = "none"
     show_data()
 }
+
+//Function to fetch image with loading progress bar animation
+const fetchImage = (url, callback) => {
+    let xhr = new XMLHttpRequest()
+    xhr.open("GET", url)
+    xhr.responseType = "blob"
+    xhr.onprogress = e => {
+        if (e.lengthComputable) {
+            let percentComplete = (e.loaded / e.total) * 100
+            // console.log(percentComplete + '% downloaded')
+        }
+    }
+    xhr.onload = () => {
+        if (xhr.status == 200) {
+            callback(window.URL.createObjectURL(xhr.response))
+        }
+    }
+    xhr.send()
+}
+
+fetchImage("https://images.pexels.com/photos/709552/pexels-photo-709552.jpeg?auto=compress&cs=tinysrgb&w=3504&h=2336&dpr=1", url => {
+    document.querySelector(".bg").style.backgroundImage = "url(" + url + ")"
+    document.querySelector(".bg").style.backgroundPosition = "center"
+    document.querySelector(".bg").style.backgroundSize = "cover"
+    document.querySelector(".bg").style.backgroundRepeat = "no-repeat"
+})
